@@ -4,27 +4,432 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Azime Home</title>
-  <meta name="description" content="Azime Home">
+  <meta name="description" content="Azime Home. Raised on the mountain, refined at the table. Old-world kitchen skills from the Mediterranean, taught with modern luxury from Denver.">
+  <meta property="og:title" content="Azime Home">
+  <meta property="og:description" content="Raised on the mountain. Refined at the table.">
+  <meta property="og:url" content="https://azimehome.com/">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#F6F1E7">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M8 60V30a24 24 0 0 1 48 0v30z' fill='%235E6744'/%3E%3Ctext x='32' y='50' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='32' fill='%23F6F1E7'%3Ea%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    :root { --bg: #fafaf7; --fg: #1f2328; --muted: #5b6470; }
-    @media (prefers-color-scheme: dark) {
-      :root { --bg: #14161a; --fg: #e8e6e3; --muted: #9aa3ad; }
+    :root {
+      --limestone: #F6F1E7;
+      --parchment: #EAE1D0;
+      --blush: #EED9CF;
+      --cast-iron: #2A2622;
+      --ink-muted: #6A6157;
+      --olive: #5E6744;
+      --clay: #A65A3F;
+      --fig: #6E3442;
+      --brass: #B0925A;
+      --hairline: #D6CBB7;
+
+      --serif: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+      --sans: "Jost", "Futura", "Avenir Next", system-ui, sans-serif;
+
+      --space-2: 8px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-12: 48px;
+      --radius-sm: 4px;
+      --radius-md: 12px;
+      --max: 1120px;
     }
-    * { box-sizing: border-box; }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      margin: 0; min-height: 100vh; display: grid; place-items: center;
-      background: var(--bg); color: var(--fg);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      padding: 16px; text-align: center;
+      margin: 0;
+      background: var(--limestone);
+      color: var(--cast-iron);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 27px;
+      -webkit-font-smoothing: antialiased;
     }
-    h1 { font-size: clamp(2rem, 6vw, 3.5rem); margin: 0 0 .5rem; letter-spacing: -.02em; }
-    p { color: var(--muted); margin: 0; }
+    img { max-width: 100%; display: block; }
+    a { color: var(--olive); text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--olive); outline-offset: 3px; }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--space-4); }
+    @media (min-width: 720px) { .wrap { padding: 0 var(--space-12); } }
+
+    .label {
+      font-family: var(--sans);
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin: 0 0 var(--space-2);
+    }
+    .label--clay { color: var(--clay); }
+
+    h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; }
+    h1 { font-size: clamp(48px, 9vw, 72px); line-height: 0.95; letter-spacing: -0.01em; }
+    h2 { font-size: clamp(34px, 5vw, 44px); line-height: 1.1; }
+    h3 { font-size: 28px; line-height: 34px; font-weight: 500; }
+    em { font-style: italic; }
+    p { margin: 0 0 var(--space-4); }
+    .muted { color: var(--ink-muted); }
+
+    .rule { border: 0; border-top: 1px solid var(--hairline); margin: 0; }
+    .rule--brass { border-top-color: var(--brass); }
+
+    /* Header */
+    .site-header { border-bottom: 1px solid var(--hairline); }
+    .site-header .wrap {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--space-4); padding-top: var(--space-4); padding-bottom: var(--space-4);
+    }
+    .lockup { display: inline-flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--cast-iron); }
+    .lockup__name { font-family: var(--serif); font-style: italic; font-size: 34px; line-height: 1; color: var(--olive); }
+    .lockup__rule { width: 36px; height: 1px; background: var(--brass); margin: 6px 0 5px; }
+    .lockup__home { font-family: var(--sans); font-weight: 500; font-size: 10px; letter-spacing: 0.4em; margin-right: -0.4em; line-height: 1; }
+    .nav { display: none; gap: var(--space-6); }
+    .nav a { color: var(--cast-iron); text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; }
+    .nav a:hover { color: var(--olive); }
+    @media (min-width: 720px) { .nav { display: flex; } }
+
+    /* Hero */
+    .hero { padding: var(--space-12) 0; }
+    .hero .wrap { display: grid; gap: var(--space-12); align-items: center; }
+    @media (min-width: 880px) {
+      .hero { padding: 96px 0; }
+      .hero .wrap { grid-template-columns: 1.05fr 1fr; }
+    }
+    .hero__lede { font-size: 18px; line-height: 30px; max-width: 30em; margin-top: var(--space-6); }
+    .hero__tagline { font-family: var(--serif); font-style: italic; font-size: 24px; line-height: 32px; color: var(--ink-muted); margin: var(--space-6) 0 0; }
+
+    .arch {
+      position: relative;
+      border-radius: 999px 999px var(--radius-md) var(--radius-md);
+      overflow: hidden;
+      background: var(--parchment);
+      aspect-ratio: 4 / 5;
+      display: grid; place-items: center;
+    }
+    .arch--blush { background: var(--blush); }
+    .arch img { width: 100%; height: 100%; object-fit: cover; }
+    .arch__inner {
+      position: absolute; inset: 14px;
+      border: 1px solid var(--brass);
+      border-radius: 999px 999px 6px 6px;
+      pointer-events: none;
+    }
+    .arch__ornament { width: 44%; max-width: 180px; color: var(--olive); }
+    .hero .arch { max-width: 440px; width: 100%; justify-self: center; }
+
+    .btn {
+      display: inline-block;
+      font-family: var(--sans); font-size: 12px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none;
+      padding: 14px 26px; border-radius: var(--radius-sm);
+      background: var(--olive); color: var(--limestone);
+      border: 1px solid var(--olive);
+      transition: background .2s, color .2s;
+    }
+    .btn:hover { background: var(--cast-iron); border-color: var(--cast-iron); }
+    .btn--ghost { background: transparent; color: var(--olive); }
+    .btn--ghost:hover { background: var(--olive); color: var(--limestone); border-color: var(--olive); }
+    .actions { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-6); }
+
+    section { padding: 72px 0; }
+    @media (min-width: 720px) { section { padding: 96px 0; } }
+
+    /* Story */
+    .story .wrap { display: grid; gap: var(--space-12); }
+    @media (min-width: 880px) { .story .wrap { grid-template-columns: 1fr 1.2fr; align-items: start; } }
+    .story h2 { margin-bottom: var(--space-6); }
+    .story .arch { max-width: 380px; }
+
+    /* Pillars */
+    .pillars { background: var(--parchment); }
+    .pillars__head { max-width: 36em; margin-bottom: var(--space-12); }
+    .pillar-grid { display: grid; gap: 0; border-top: 1px solid var(--hairline); }
+    @media (min-width: 720px) { .pillar-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1000px) { .pillar-grid { grid-template-columns: repeat(4, 1fr); } }
+    .pillar { padding: var(--space-6) 0; border-bottom: 1px solid var(--hairline); }
+    @media (min-width: 720px) { .pillar { padding: var(--space-6); } }
+    .pillar h3 { margin-bottom: var(--space-2); }
+    .pillar svg { width: 32px; height: 32px; color: var(--olive); margin-bottom: var(--space-4); }
+    .pillar p { margin: 0; color: var(--ink-muted); }
+
+    /* Series */
+    .section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: var(--space-6); margin-bottom: var(--space-12); }
+    .section-head > div { max-width: 34em; }
+    .series-grid { display: grid; gap: var(--space-12) var(--space-6); }
+    @media (min-width: 880px) { .series-grid { grid-template-columns: repeat(3, 1fr); } }
+    .series .arch { aspect-ratio: 3 / 4; margin-bottom: var(--space-6); }
+    .series h3 { font-size: 32px; line-height: 38px; font-weight: 400; margin-bottom: var(--space-2); }
+    .series p { color: var(--ink-muted); }
+
+    /* Quote */
+    .quote { background: var(--blush); text-align: center; }
+    .quote blockquote { margin: 0 auto; max-width: 20em; }
+    .quote blockquote p {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(32px, 5vw, 48px); line-height: 1.15; margin: 0;
+    }
+    .quote .rule--brass { width: 48px; margin: var(--space-6) auto; }
+    .quote cite { font-style: normal; }
+
+    /* Lines */
+    .lines-grid { display: grid; gap: var(--space-6); }
+    @media (min-width: 880px) { .lines-grid { grid-template-columns: repeat(3, 1fr); } }
+    .line-card {
+      background: var(--parchment);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      display: flex; flex-direction: column;
+    }
+    @media (min-width: 720px) { .line-card { padding: 36px; } }
+    .line-card__name { font-family: var(--serif); font-size: 30px; line-height: 1.1; margin: 0 0 var(--space-4); }
+    .line-card__name .dot { color: var(--brass); padding: 0 .15em; }
+    .line-card ul { list-style: none; padding: 0; margin: 0 0 var(--space-6); }
+    .line-card li { padding: 10px 0; border-bottom: 1px solid var(--hairline); }
+    .line-card li:first-child { border-top: 1px solid var(--hairline); }
+    .line-card .origin { font-family: var(--serif); font-style: italic; font-size: 18px; line-height: 26px; color: var(--ink-muted); margin: auto 0 0; }
+
+    /* Evening band */
+    .sofra { background: var(--fig); color: var(--limestone); }
+    .sofra .wrap { display: grid; gap: var(--space-6); text-align: center; justify-items: center; }
+    .sofra .label { color: var(--blush); }
+    .sofra h2 { max-width: 16em; }
+    .sofra p { max-width: 34em; margin: 0; }
+    .sofra .btn { background: var(--limestone); color: var(--fig); border-color: var(--limestone); }
+    .sofra .btn:hover { background: transparent; color: var(--limestone); }
+
+    /* Footer */
+    .site-footer { background: var(--cast-iron); color: var(--limestone); padding: var(--space-12) 0; }
+    .site-footer .wrap { display: grid; gap: var(--space-6); justify-items: center; text-align: center; }
+    .site-footer .lockup { color: var(--limestone); }
+    .site-footer .lockup__name { color: var(--limestone); }
+    .site-footer p { margin: 0; font-size: 13px; line-height: 20px; color: var(--hairline); }
+    .site-footer a { color: var(--limestone); }
+    .pronounce { font-family: var(--serif); font-style: italic; font-size: 18px !important; }
   </style>
 </head>
 <body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="lockup" href="/" aria-label="Azime Home, home">
+        <span class="lockup__name">Azime</span>
+        <span class="lockup__rule" aria-hidden="true"></span>
+        <span class="lockup__home">HOME</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="#story">Story</a>
+        <a href="#series">Series</a>
+        <a href="#lines">Shop</a>
+        <a href="#sofra">Sofra</a>
+      </nav>
+    </div>
+  </header>
+
   <main>
-    <h1>Azime Home</h1>
-    <p>Coming soon.</p>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap">
+        <div>
+          <p class="label label--clay">From scratch · Since the mountain</p>
+          <h1 id="hero-title">Raised on the mountain. Refined at the <em>table.</em></h1>
+          <p class="hero__lede">Real butter you churned. Honey you know the source of. Bread with a story. Azime teaches the old way of making things, from scratch and without shortcuts, for a beautiful modern home.</p>
+          <div class="actions">
+            <a class="btn" href="#series">Start cooking</a>
+            <a class="btn btn--ghost" href="#story">Meet Azime</a>
+          </div>
+        </div>
+        <div class="arch" role="img" aria-label="Photo placeholder: Azime at work in her kitchen">
+          <!-- Replace with: <img src="images/hero.jpg" alt="Azime kneading dough on a floured stone counter"> -->
+          <svg class="arch__ornament" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M60 108V22"/>
+            <path d="M60 34c-10-4-18-2-24 6 8 4 17 3 24-6z"/>
+            <path d="M60 34c10-4 18-2 24 6-8 4-17 3-24-6z"/>
+            <path d="M60 54c-11-4-20-1-26 7 9 4 19 3 26-7z"/>
+            <path d="M60 54c11-4 20-1 26 7-9 4-19 3-26-7z"/>
+            <path d="M60 74c-11-4-20-1-26 7 9 4 19 3 26-7z"/>
+            <path d="M60 74c11-4 20-1 26 7-9 4-19 3-26-7z"/>
+            <ellipse cx="44" cy="96" rx="5" ry="7"/>
+            <ellipse cx="76" cy="96" rx="5" ry="7"/>
+          </svg>
+          <span class="arch__inner" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap"><hr class="rule"></div>
+
+    <section class="story" id="story" aria-labelledby="story-title">
+      <div class="wrap">
+        <div class="arch arch--blush" role="img" aria-label="Photo placeholder: the Taurus Mountains above Alanya">
+          <!-- Replace with: <img src="images/mountains.jpg" alt="Terraced olive groves in the Taurus Mountains above Alanya"> -->
+          <svg class="arch__ornament" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10 90l30-40 16 20 18-30 36 50z"/>
+            <path d="M8 100c20-6 36 6 52 0s32-6 52 0"/>
+            <circle cx="86" cy="26" r="8"/>
+          </svg>
+          <span class="arch__inner" aria-hidden="true"></span>
+        </div>
+        <div>
+          <p class="label">The story</p>
+          <h2 id="story-title">A girl from the mountains above the <em>Mediterranean.</em></h2>
+          <p>Azime grew up in a village in the Taurus Mountains, high above Alanya on the Mediterranean coast. Mornings meant milking, gathering, pressing and baking. The pantry was something you built with your hands over a season.</p>
+          <p>Today she lives in Cherry Creek North, Denver, loves beautiful things, and believes the old skills are the ultimate luxury. She teaches them to people who never had the chance to learn, with high standards and a little bit of heat.</p>
+          <p class="muted"><em style="font-family: var(--serif); font-size: 22px;">"My grandmother never measured. You will, until you don't have to."</em></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pillars" aria-labelledby="pillars-title">
+      <div class="wrap">
+        <div class="pillars__head">
+          <p class="label">What we stand for</p>
+          <h2 id="pillars-title">The old way, done <em>properly.</em></h2>
+        </div>
+        <div class="pillar-grid">
+          <div class="pillar">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 26l8-11 5 6 4-6 7 11z"/><circle cx="23" cy="8" r="3"/></svg>
+            <h3>Provenance</h3>
+            <p>Every recipe and product has a place behind it: the mountain, the grove, the coast. We say where things come from.</p>
+          </div>
+          <div class="pillar">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 26L22 10"/><path d="M22 10l4-4c1 3 0 6-3 7z"/><path d="M8 22l2 2"/></svg>
+            <h3>Mastery</h3>
+            <p>Curing olives, making yogurt, laminating dough, preserving a harvest. Old skills, taught properly.</p>
+          </div>
+          <div class="pillar">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4c3 5 7 8 7 14a7 7 0 0 1-14 0c0-4 2-6 3-9 1 3 2 4 4 5 0-4-1-7 0-10z"/></svg>
+            <h3>Standards</h3>
+            <p>Azime cares enough to be direct. Do it right, or do it again.</p>
+          </div>
+          <div class="pillar">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18h24"/><path d="M6 18a10 10 0 0 0 20 0"/><path d="M16 8v4"/><path d="M12 10l1 2M20 10l-1 2"/></svg>
+            <h3>Generosity</h3>
+            <p>Feed people well, set the table beautifully, and send them home with something.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="series" id="series" aria-labelledby="series-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="label">Watch &amp; learn</p>
+            <h2 id="series-title">Three series. No <em>shortcuts.</em></h2>
+          </div>
+          <p class="muted" style="max-width: 24em; margin: 0;">If you can buy it in a jar, you can make it better.</p>
+        </div>
+        <div class="series-grid">
+          <article>
+            <div class="arch" role="img" aria-label="Photo placeholder: jars of preserves on a pantry shelf">
+              <svg class="arch__ornament" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="36" y="30" width="48" height="10" rx="2"/><path d="M38 40h44v52a8 8 0 0 1-8 8H46a8 8 0 0 1-8-8z"/><path d="M38 60h44"/></svg>
+              <span class="arch__inner" aria-hidden="true"></span>
+            </div>
+            <p class="label label--clay">Preserving &amp; staples</p>
+            <h3>The Mountain <em>Pantry</em></h3>
+            <p>Yogurt, butter, cured olives, stock, jam. The staples you were told to buy, made the way they were meant to be.</p>
+          </article>
+          <article>
+            <div class="arch arch--blush" role="img" aria-label="Photo placeholder: a long table set for a Sunday meal">
+              <svg class="arch__ornament" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="60" cy="62" r="26"/><circle cx="60" cy="62" r="17"/><path d="M22 40v44M18 40v10a4 4 0 0 0 8 0V40"/><path d="M98 40c-5 0-6 10-6 18h6v26"/></svg>
+              <span class="arch__inner" aria-hidden="true"></span>
+            </div>
+            <p class="label label--clay">Hosting &amp; the shared table</p>
+            <h3>Sunday <em>Sofra</em></h3>
+            <p><em>Sofra</em> means the shared table. Menus, table settings and the quiet art of making people feel welcome.</p>
+          </article>
+          <article>
+            <div class="arch" role="img" aria-label="Photo placeholder: a knife mid-cut on an olive-wood board">
+              <svg class="arch__ornament" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 92L80 36c6-6 14-6 18-2L44 88"/><path d="M24 92l-6 6M30 86l-6 6"/><path d="M44 88l-8 8"/></svg>
+              <span class="arch__inner" aria-hidden="true"></span>
+            </div>
+            <p class="label label--clay">Technique, done properly</p>
+            <h3>Azime's <em>Standards</em></h3>
+            <p>Knife work, laminated dough, butchery basics. Store-bought stock? Darling, no. Bones, water, time.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote" aria-label="A word from Azime">
+      <div class="wrap">
+        <blockquote>
+          <p>Set the table like someone you love is coming. Someone is.</p>
+          <hr class="rule rule--brass">
+          <cite class="label">Azime</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="lines" id="lines" aria-labelledby="lines-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="label">Coming soon</p>
+            <h2 id="lines-title">For the pantry, the garden <em>and the table.</em></h2>
+          </div>
+        </div>
+        <div class="lines-grid">
+          <article class="line-card">
+            <p class="line-card__name">Azime Home<span class="dot">·</span><em>Pantry</em></p>
+            <ul>
+              <li>Single-estate olive oil</li>
+              <li>Mountain thyme honey</li>
+              <li>Preserves</li>
+            </ul>
+            <p class="origin">Pressed from groves on the Mediterranean coast.</p>
+          </article>
+          <article class="line-card">
+            <p class="line-card__name">Azime Home<span class="dot">·</span><em>Garden</em></p>
+            <ul>
+              <li>Heirloom seeds</li>
+              <li>Garden tools</li>
+              <li>Linens for outdoor dining</li>
+            </ul>
+            <p class="origin">For terraces, kitchen gardens and long summer evenings.</p>
+          </article>
+          <article class="line-card">
+            <p class="line-card__name">Azime Home<span class="dot">·</span><em>Table</em></p>
+            <ul>
+              <li>Olive-wood board</li>
+              <li>Hand-thrown terracotta baker</li>
+              <li>Linen aprons</li>
+            </ul>
+            <p class="origin">Serveware made to be used, every day.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sofra" id="sofra" aria-labelledby="sofra-title">
+      <div class="wrap">
+        <p class="label">The dinner series</p>
+        <h2 id="sofra-title">Pull up a chair at the <em>sofra.</em></h2>
+        <p>Intimate dinners and hands-on classes in Denver are on the way. Bring an appetite and an apron.</p>
+        <a class="btn" href="mailto:hello@azimehome.com?subject=Sofra%20dinners">Ask about dinners</a>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <a class="lockup" href="/" aria-label="Azime Home, home">
+        <span class="lockup__name">Azime</span>
+        <span class="lockup__rule" aria-hidden="true"></span>
+        <span class="lockup__home">HOME</span>
+      </a>
+      <p class="pronounce">Azime, said ah-zee-MEH.</p>
+      <p>Cherry Creek North, Denver · <a href="mailto:hello@azimehome.com">hello@azimehome.com</a></p>
+      <p>&copy; <span id="year">2026</span> Azime Home</p>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
